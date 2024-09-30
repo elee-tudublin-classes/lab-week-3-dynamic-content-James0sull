@@ -2,6 +2,9 @@
 
 {% include "./partials/nav.html" ignore missing with context %}
 
-<h1>This is the advice page</h1>
+<h1>Advice</h1>
+<div class="alert alert-info" role="alert">
+    <p>{{ data.slip.advice }}</p>
+</div>
 
 {% include "./partials/dependencies.html" ignore missing with context %}
