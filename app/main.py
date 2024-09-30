@@ -4,6 +4,11 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from datetime import datetime
+import httpx
+import json
+from starlette.config import Config
+
+config = Config(".env")
 
 # create app instance
 app = FastAPI()
