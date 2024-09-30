@@ -16,6 +16,20 @@ templates = Jinja2Templates(directory="app/view_templates")
 async def index(request: Request):
     return templates.TemplateResponse(request=request, name="index.html")
 
+
+@app.get("/advice", response_class=HTMLResponse)
+async def advice(request: Request):
+    return templates.TemplateResponse(request=request, name="advice.html")
+
+@app.get("/apod", response_class=HTMLResponse)
+async def apod(request: Request):
+    return templates.TemplateResponse(request=request, name="apod.html")
+
+@app.get("/params", response_class=HTMLResponse)
+async def params(request: Request):
+    return templates.TemplateResponse(request=request, name="params.html")
+
+
 app.mount(
     "/static",
     StaticFiles(directory="app/static"),
