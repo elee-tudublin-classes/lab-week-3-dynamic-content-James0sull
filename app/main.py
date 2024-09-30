@@ -3,6 +3,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from datetime import datetime
 
 # create app instance
 app = FastAPI()
@@ -14,8 +15,10 @@ templates = Jinja2Templates(directory="app/view_templates")
 # return the index.html page
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    return templates.TemplateResponse(request=request, name="index.html")
 
+    serverTime: datetime = datetime.now().strftime("%d/%n/%y %H:%M:%S")
+
+    return templates.TemplateResponse("index.html", {"request": request, "serverTime": serverTime})
 
 @app.get("/advice", response_class=HTMLResponse)
 async def advice(request: Request):
@@ -26,8 +29,8 @@ async def apod(request: Request):
     return templates.TemplateResponse(request=request, name="apod.html")
 
 @app.get("/params", response_class=HTMLResponse)
-async def params(request: Request):
-    return templates.TemplateResponse(request=request, name="params.html")
+async def params(request: Request, name : str | None = ""):
+    return templates.TemplateResponse("params.html", {"request": request, "name": name})
 
 
 app.mount(
